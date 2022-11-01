@@ -1,36 +1,49 @@
-import express, { Express, Request, Response } from 'express';
-import { Router } from "express-serve-static-core";
-// import { auth, home, user, contact, notif, message } from "./../controllers/index";
-// import {initPassportLocal, initPassportGoogle, initPassportFacebook} from "./../controllers/passportController/index";
-// import { authValid, userValid, messageValid } from "./../validation/index";
-import passport from "passport";
+import express from 'express';
 import BookController from '../controllers/bookController';
+import AuthController from '../controllers/authController';
+import passport from 'passport';
+import { checkToken } from '../middleware/checkToken';
+
+const route = express.Router()
 const bookController = new BookController();
-const route = (app: any) => {  
-    app.route('/login')
-        .get()
-        .post()
-        .put()
-        .delete();
-    app.route('/book')
-        .get(bookController.getAllBooks)
-        .post(bookController.addBook)
-        .put()
-        .delete();
+const authController = new AuthController();
 
-    // app.route('/login')
-    //     .get(function (req, res) {
-    //         res.send('Hello World!');
-    //     })
-    //     .post(function (req, res) {
-    //         res.send('Got a POST request');
-    //     })
-    //     .put(function (req, res) {
-    //         res.send('Got a PUT request at /user');
-    //     })
-    //     .delete(function (req, res) {
-    //         res.send('Got a DELETE request at /user');
-    //     });
 
-}
+
+
+//Login
+    route.post(`/login`,
+                passport.authenticate('local', {
+                    failureRedirect: '/login/register'
+                }),authController.login);
+    route.post(`/login/register`,
+                authController.register);
+
+
+
+
+
+//Book
+    route.get(`/book/home-book`,
+                checkToken,
+                bookController.homeBook);
+    route.get(`/book/get-book-by-id/:id`,
+                checkToken,
+                bookController.getBookById);
+    route.get(`/book/get-all-book`,
+                checkToken,
+                bookController.getAllBooks);
+    route.delete(`/book/delete-book`,
+                checkToken,
+                bookController.deleteBook);
+    route.post(`/book/add-book`,
+                checkToken,
+                bookController.addBook);
+    route.put(`/book/update-book`,
+                checkToken,
+                bookController.updateBook);
+
+
+
 export default route;
+

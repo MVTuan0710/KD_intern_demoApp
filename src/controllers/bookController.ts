@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
-import { CreateBookDto } from '../dtos/bookDto';
+import { CreateBookDto } from '../dtos/bookDTO';
 import { BookEntity } from '../entity/bookEntity';
 import  BookService   from '../services/bookService';
 
@@ -22,7 +22,6 @@ class BookController{
         }
     };
     
-
     public getAllBooks = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         try {
         //   const pageNumber = Number (req.params.pageNumber)
@@ -46,6 +45,7 @@ class BookController{
           next(error);
         }
     };
+
     public updateBook = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         try {
           const bookId = Number(req.params.id);
@@ -57,6 +57,7 @@ class BookController{
           next(error);
         }
       };
+
       public deleteBook = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         try {
           const bookId = Number(req.body.id);

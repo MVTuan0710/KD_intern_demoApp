@@ -12,15 +12,9 @@ export class AccountEntity  extends BaseEntity {
     password!: string
 
     @Column()
-    phone!: string
+    phone!: number
 
     @Column()
     address!: string
-
-    @Column()
-    is_active!: boolean
-
-    @Column()
-    verify_token!: string
 }
 

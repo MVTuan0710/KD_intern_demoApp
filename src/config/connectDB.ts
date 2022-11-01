@@ -1,7 +1,9 @@
-import "reflect-metadata"
-import { DataSource } from "typeorm"
-// import { AccountEntity } from "../entitys/accountEntity"
-import { BookEntity } from "../entity/bookEntity"
+import "reflect-metadata";
+import { DataSource } from "typeorm";
+import { AccountEntity } from "../entity/accountEntity";
+import { BookEntity } from "../entity/bookEntity";
+
+
 const AppDataSource = new DataSource({
     type: "postgres",
     host: "localhost",
@@ -9,9 +11,10 @@ const AppDataSource = new DataSource({
     username: "postgres",
     password: "123",
     database: "database-test",
-    entities: [BookEntity],
+    entities: [BookEntity, AccountEntity],
     synchronize: true,
     logging: false,
 })
+
 
 export default AppDataSource;
