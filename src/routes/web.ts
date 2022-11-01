@@ -21,8 +21,6 @@ const authController = new AuthController();
 
 
 
-
-
 //Book
     route.get(`/book/home-book`,
                 checkToken,
@@ -33,13 +31,13 @@ const authController = new AuthController();
     route.get(`/book/get-all-book`,
                 checkToken,
                 bookController.getAllBooks);
-    route.delete(`/book/delete-book`,
+    route.delete(`/book/delete-book/:id`,
                 checkToken,
                 bookController.deleteBook);
     route.post(`/book/add-book`,
                 checkToken,
                 bookController.addBook);
-    route.put(`/book/update-book`,
+    route.put(`/book/update-book/:id`,
                 checkToken,
                 bookController.updateBook);
 

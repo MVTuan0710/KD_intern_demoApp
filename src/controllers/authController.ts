@@ -25,6 +25,7 @@ class AuthController{
           }    
             
         } catch (error) {
+            res.status(400).json({message: "fail"})
             throw error;
         }
     }
@@ -38,6 +39,7 @@ class AuthController{
             res.status(200).json({ data: login, message: 'Register successful' });
         } catch (error) {
             res.status(400).json({message: "fail"})
+            throw error;
         }
     };
 

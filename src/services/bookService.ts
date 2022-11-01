@@ -8,7 +8,7 @@ class BookService{
 
     public async find(): Promise<BookEntity[]> {
         const books: BookEntity[] = await bookRepository.find();
-        if (!books) throw console.error('Khong tim thay book');
+        if (!books) throw console.error('Can`t found Book by id');
         return books;
 
     }
@@ -16,7 +16,7 @@ class BookService{
     public async findBookById(bookId: number): Promise<BookEntity> {
         if (!bookId) throw console.error('Book data is empty');
         const findBook = await bookRepository.findOne({ where: { id: bookId } });
-        if (!findBook) throw console.error('Can`t found User by id');
+        if (!findBook) throw console.error('Can`t found Book by id');
         return findBook;
     }
     

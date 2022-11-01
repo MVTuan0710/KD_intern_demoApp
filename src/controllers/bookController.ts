@@ -18,7 +18,8 @@ class BookController{
     
             res.status(200).json({ data: findOneBookData, message: 'findOne' });
         } catch (error) {
-            next(error);
+          res.status(400).json({message: "fail"})
+          throw error;
         }
     };
     
@@ -29,7 +30,8 @@ class BookController{
     
           res.status(200).json({ data: findAllBooksData, message: 'findAll' });
         } catch (error) {
-          next(error);
+          res.status(400).json({message: "fail"})
+          throw error;
         }
     };
 
@@ -42,7 +44,8 @@ class BookController{
     
           res.status(201).json({ data: createBookData, message: 'created' });
         } catch (error) {
-          next(error);
+          res.status(400).json({message: "fail"})
+          throw error;
         }
     };
 
@@ -54,18 +57,20 @@ class BookController{
     
           res.status(200).json({ data: updateBookData, message: 'updated' });
         } catch (error) {
-          next(error);
+          res.status(400).json({message: "fail"})
+          throw error;
         }
       };
 
       public deleteBook = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         try {
-          const bookId = Number(req.body.id);
+          const bookId = Number(req.params.id);
           const deleteBookData = await this.bookService.deleteBook(bookId);
     
           res.status(200).json({ data: deleteBookData, message: 'deleted' });
         } catch (error) {
-          next(error);
+          res.status(400).json({message: "fail"})
+          throw error;
         }
       };
 }
